@@ -1,0 +1,72 @@
+% 文章模板
+
+% 检测allfile宏是否定义，如果定义了，跳过独立编译时的命令；如果没有定义，执行独立编译的命令。
+\ifx\allfiles\undefined
+
+\documentclass[heading=true,zihao=-4]{ctexart}
+% 使用ctex的标题样式，标准字号小四，即12pt，默认标准字体是宋体
+
+
+%控制注释是否显示，final指定稿，不显示注释
+%否则显示注释
+\def\DRAFT{}       
+
+% 引入配置文件
+\include{patstyle.tex}
+
+\begin{document}
+
+% ifx的结束
+\fi
+
+% 权利要求书的页脚文件编号、页眉
+%根据宏定义确认页脚与页眉的是否显示
+\ifx\foothide\undefined
+	\footcode{\small{100003\\2010.2}}
+	\headtit{说明书附图}	
+\else
+	\fancyfoot{}
+	\headtit{}
+	\centerline{\textbf{\large{说明书附图}}}
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% TODO
+%修改这里的数字确定附图数量
+%\def\fignum{3}
+
+%改成了在main中可以直接使用说明书中的定义
+%不过分文本的时候还是要单独生成
+\ifx\fignum\undefined
+%% TODO
+%修改这里的数字确定附图数量
+\def\fignum{3}
+
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% 循环插入附图
+% 路径已经在patstyle中定义了
+\foreach \t in {1,...,\fignum}{
+	\begin{figure}[hb]
+		\centering
+		\includegraphics{figure\t.png}
+		\caption*{图\t}
+		\setlength{\abovecaptionskip}{0pt}
+		\setlength{\belowcaptionskip}{0pt}
+	\end{figure}
+	
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\ifx\allfiles\undefined
+\end{document}
+\fi
+
+%% template change history
+% 220509 对说明文引文内容中的“发明”改为了“\pattype”代位
+% 220801 利用ifx命令实现了条件编译
+% 230530 改成了在main中可以直接使用说明书中的定义，不过分文本的时候还是要单独生成

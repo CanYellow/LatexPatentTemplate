@@ -1,0 +1,73 @@
+% 文章模板
+
+% 检测allfile宏是否定义，如果定义了，跳过独立编译时的命令；如果没有定义，执行独立编译的命令。
+\ifx\allfiles\undefined
+
+\documentclass[heading=true,zihao=-4]{ctexart}
+% 使用ctex的标题样式，标准字号小四，即12pt，默认标准字体是宋体
+
+
+%控制注释是否显示，final指定稿，不显示注释
+%否则显示注释
+\def\DRAFT{}       
+
+% 控制是否显示修订格式
+% 注释该行以定稿模式显示
+\def\REV{}
+
+
+% 引入配置文件
+\include{patstyle.tex}
+
+\begin{document}
+
+% ifx的结束
+\fi
+
+% 权利要求书的页脚文件编号、页眉文件名
+%根据宏定义确认页脚与页眉的是否显示
+\ifx\foothide\undefined
+	\footcode{\small{100001\\2010.2}}
+	\headtit{权利要求书}	
+\else
+	\fancyfoot{}
+	\headtit{}
+	\centerline{\textbf{\large{权利要求书}}}
+\fi
+
+%注释的说明
+\note{提请各读者注意，所有以“【】”包含的部分为初稿的补充说明内容，不属于正式定稿的内容，在正式定稿件中将全部删除}
+
+
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%权利要求书正文
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%TODO 
+%1
+\item 一种\patthemef ，其特征在于， 。
+
+%2
+\item 如权利要求1所述的\patthemef ，其特征在于，  。
+
+%
+%\item  一种计算机可读储存介质，存储有计算机程序，所述计算机程序被处理器执行时，使所述处理器执行如权利要求1-*任一项所述的电力系统联合规划方法的步骤。
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{enumerate}
+
+% 检测allfile宏是否定义
+\ifx\allfiles\undefined
+
+\end{document}
+
+% ifx的结束
+\fi
+
+%% template change history
+% 220509 对说明文引文内容中的“发明”改为了“\pattype”代位
+% 220801 利用ifx命令实现了条件编译
+% 230303 增加了REV变量

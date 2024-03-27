@@ -1,0 +1,59 @@
+% 文章模板
+
+% 检测allfile宏是否定义，如果定义了，跳过独立编译时的命令；如果没有定义，执行独立编译的命令。
+\ifx\allfiles\undefined
+
+\documentclass[heading=true,zihao=-4]{ctexart}
+% 使用ctex的标题样式，标准字号小四，即12pt，默认标准字体是宋体
+
+
+%控制注释是否显示，final指定稿，不显示注释
+%否则显示注释
+\def\DRAFT{}       
+
+% 引入配置文件
+\include{patstyle.tex}
+
+\begin{document}
+
+% ifx的结束
+\fi
+
+% 附图说明的页脚文件编号、页眉
+%根据宏定义确认页脚与页眉的是否显示
+\ifx\foothide\undefined
+	\footcode{\small{100005\\2010.2}}
+	\headtit{摘要附图}	
+\else
+	\fancyfoot{}
+	\headtit{}
+	\centerline{\textbf{\large{摘要附图}}}
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% TODO
+%修改这里的数字确定用第几个附图
+\def\anum{1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% 零高度行，使图片居上
+%\rule{\paperwidth}{0.0pt}
+
+% 插入图片	
+\begin{figure}[hb]
+\centering
+\includegraphics{figure\anum.png}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\ifx\allfiles\undefined
+\end{document}
+\fi
+
+%% template change history
+% 220509 对说明文引文内容中的“发明”改为了“\pattype”代位
+% 220801 利用ifx命令实现了条件编译
+% 230519 为了导出Word而设置了页眉页脚开关

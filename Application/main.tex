@@ -1,0 +1,90 @@
+% 使用XeLaTeX编译
+% 文章模板
+% 申请文件的主体
+\documentclass[heading=true,zihao=-4]{ctexart}
+% 使用ctex的标题样式，标准字号小四，即12pt，默认标准字体是宋体
+
+
+%宏定义部分
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% 定义allfiles宏以实现条件编译
+% 即在main文件中定义，在分节文件中检测，
+% 如果从main编译，allfile定义了，分节文件中的相关设置不执行，
+% 如果从分节文件中编译，则allfile未定义，分节文件中的相关设置执行
+\def\allfiles{}
+
+%控制注释是否显示，final指定稿，不显示注释
+%否则显示注释
+\def\DRAFT{}    
+
+% 控制是否显示修订格式
+% 注释该行以定稿模式显示
+\def\REV{}
+
+%控制页脚的输出
+%用于转换Word前无页脚化
+% 定义页脚是否显示，默认是显示的
+%\def\foothide{}
+
+%控制注释是否显示，final指定稿，不显示注释
+%否则显示注释
+\def\DRAFTNUM{}    
+
+
+%配置部分
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% 配置文件
+\include{patstyle.tex}
+
+%当去除页脚时，同时不显示页眉页脚的横线
+\ifx\foothide\undefined
+	\renewcommand{\headrulewidth}{0.4pt}
+	\renewcommand{\footrulewidth}{0.4pt}
+\else
+	\renewcommand{\headrulewidth}{0.0pt}
+	\renewcommand{\footrulewidth}{0.0pt}
+\fi
+
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\hypertarget{claim}{}
+\bookmark[dest=claim,level=1]{权利要求书}
+% 权利要求书
+\include{100001-claim.tex}
+
+\hypertarget{description}{}
+\bookmark[dest=description,level=1]{说明书}
+\bookmarksetup{rellevel=1}
+% 说明书
+\include{100002-description.tex}
+
+\hypertarget{figure4desc}{}
+\bookmark[dest=figure4desc,level=1]{说明书附图}
+% 说明书附图
+\include{100003-figure4desc.tex}
+
+
+\hypertarget{abstract}{}
+\bookmark[dest=abstract,level=1]{说明书摘要}
+% 说明书摘要
+\include{100004-abstract.tex}
+
+
+\hypertarget{figure4abstract}{}
+\bookmark[dest=figure4abstract,level=1]{摘要附图}
+% 摘要附图
+\include{100005-figure4abstract.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
+
+%% template change history
+% 220509 对说明文引文内容中的“发明”改为了“\pattype”代位
+% 220801 利用ifx命令实现了条件编译
+% 230303 新增了REV变量控制输出格式

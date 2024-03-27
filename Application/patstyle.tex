@@ -1,0 +1,264 @@
+% 用于页边距调整
+\usepackage[paper=a4paper,left=2.5cm,right=1.5cm,top=2.5cm,bottom=1.5cm]{geometry}
+% 设置了A4纸张，页边距：左侧和顶部各25毫米，右侧和底部各15毫米
+
+% 行号支持
+\usepackage[modulo]{lineno}
+
+% 中文文本下划线的美化支持
+% 同时也是为了避免latexdiff不换行的问题
+\usepackage{xeCJKfntef}
+
+%example
+%\CJKunderline{*}
+
+% 数学公式支持
+\usepackage{amsmath, amssymb, mathtools}
+
+% 提供角度符号支持
+\usepackage{gensymb}
+
+% 图片支持
+\usepackage{graphicx}
+
+%图片边框支持
+\usepackage[linewidth=1pt]{mdframed}
+
+% loop循环支持
+\usepackage{pgffor}
+
+% 自定义页眉页脚的样式库
+\usepackage{fancyhdr}
+
+% 用于设置图的标题
+\usepackage[font=small]{caption}
+
+% 用于调整有序列表环境的宏包
+\usepackage{enumitem}  
+
+% csv文本用于附图说明
+\usepackage{csvsimple}
+
+%% begin 表格设置
+%% 三线表同时用于附注设置
+\usepackage{threeparttable}
+
+% 表格边框支持
+\usepackage{booktabs}
+
+% 表格合并单元格支持
+\usepackage{multirow}
+
+% 表格填充颜色支持
+\usepackage{colortbl}
+
+% 表格字体颜色支持
+\usepackage{xcolor}
+
+% 超链接支持
+\usepackage{hyperref}
+
+%用于手动pdf书签
+\usepackage[numbered]{bookmark}
+
+%指定url的换行设置
+\makeatletter
+\def\UrlAlphabet{%
+      \do\a\do\b\do\c\do\d\do\e\do\f\do\g\do\h\do\i\do\j%
+      \do\k\do\l\do\m\do\n\do\o\do\p\do\q\do\r\do\s\do\t%
+      \do\u\do\v\do\w\do\x\do\y\do\z\do\A\do\B\do\C\do\D%
+      \do\E\do\F\do\G\do\H\do\I\do\J\do\K\do\L\do\M\do\N%
+      \do\O\do\P\do\Q\do\R\do\S\do\T\do\U\do\V\do\W\do\X%
+      \do\Y\do\Z}
+\def\UrlDigits{\do\1\do\2\do\3\do\4\do\5\do\6\do\7\do\8\do\9\do\0}
+\g@addto@macro{\UrlBreaks}{\UrlOrds}
+\g@addto@macro{\UrlBreaks}{\UrlAlphabet}
+\g@addto@macro{\UrlBreaks}{\UrlDigits}
+\makeatother
+
+%超链接格式设置
+\hypersetup{
+hidelinks,
+colorlinks=true,
+linkcolor=blue,
+citecolor=blue
+}
+
+% 表格旋转支持
+\usepackage{rotating}
+
+%% end 表格设置
+%% 用于适配Excel2latex
+% 附图子目录路径
+\graphicspath{{figures/}}
+
+% 调整行距，不是行间距
+% 默认是1.2倍行距，参数1.5是放大因子，所以实际行距为1.2*1.5=1.8
+\linespread{1.5}
+
+% 自定义页眉页脚样式
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}%分隔线宽度4磅
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyhead[C]{\bfseries\large{{\ziju{1.1}说明书}}}
+\fancyfoot[L]{100001\\2010.2}
+
+% 调整页眉页脚的上下距离
+\setlength{\headsep}{10pt}
+\setlength{\footskip}{20pt}
+\setlength{\headheight}{19pt}
+
+% 设置有序列表的正常缩进与行距
+%设置有序列表首行缩进
+\setlist[enumerate]{wide=\parindent}
+% 设置无序列表首行缩进                   
+\setlist[itemize]{wide=\parindent}
+% 设置列表为默认行距                     
+\setlist{nosep} 
+
+
+% 节标题的格式设置
+\ifx\ROA\undefined
+	\ctexset{
+		section/numbering=false,
+		section/format=\bfseries\raggedright,
+		section/beforeskip=12pt,
+		section/afterskip=0pt
+	}
+\else
+	\ctexset{
+		section/numbering=false,
+		section/format=\large\centering,
+		section/beforeskip=15pt,
+		section/afterskip=5pt
+	}
+\fi
+
+
+% 子节标题的格式设置
+\ctexset{
+	subsection/numbering=false,
+	subsection/format=\bfseries\raggedright,
+	subsection/beforeskip=0pt,
+	subsection/afterskip=0pt
+}
+
+% 子子节标题的格式设置
+\ctexset{
+	subsubsection/name={\quad},
+	subsubsection/number=\chinese{subsubsection},
+	subsubsection/format=\bfseries\raggedright,
+	subsubsection/beforeskip=0pt,
+	subsubsection/afterskip=0pt
+}
+
+% 子子节下的段的标题的格式设置
+\ctexset{
+	paragraph/runin=false,
+	paragraph/indent=2\ccwd,
+	paragraph/numbering=true,
+	paragraph/beforeskip=0pt,
+	paragraph/afterskip=0pt
+}
+
+
+% 自定义函数与变量
+\input{patvar}
+
+% 定义页眉标题命令与页脚文件编号命令
+\def\headtit#1{\fancyhead[C]{\bfseries\large{{\ziju{1.1}#1}}}}
+\def\footcode#1{\fancyfoot[L]{#1}}
+
+% 定义附图说明
+% 说明书中的附图编号带编号的
+\def\numb#1{\csvreader[head to column names,filter equal={\numbering}{#1}]{numbering.csv}{}{\name\numbering}}
+% 说明书中的附图编号带前编号的
+\def\pnumb#1{\csvreader[head to column names,filter equal={\numbering}{#1}]{numbering.csv}{}{\numbering\name}}
+% 说明书中的附图编号不带编号的
+\def\numbn#1{\csvreader[head to column names,filter equal={\numbering}{#1}]{numbering.csv}{}{\name}}
+% 权利要求中的附图编号
+\def\numbc#1{\csvreader[head to column names,filter equal={\numbering}{#1}]{numbering.csv}{}{\name(\numbering)}}
+% 附图说明的列表
+\def\numbl{\csvreader[head to column names]{numbering.csv}{}{\numbering:\name\quad}}
+
+% 指定不属于附图标记编号中的重复特征的编号，不显示编号
+\def\nns#1{\csvreader[head to column names,filter equal={\numbering}{#1}]{numberingNoShow.csv}{}{\name}}
+
+% 文字形波浪符支持
+\newcommand{\blf}{\textasciitilde}
+
+
+% 所有的修订内容均单独成行，不用时直接用%注释
+
+% 指定修改后的文字的颜色标记的简化命令，这主要用于修订内容的手动高亮
+% 同时定义一个跟随revb的空函数，方便查找替换
+%\def\cmt#1{}
+% 可以用latexdiff实现，但自定义命令与数学公式的支持问题很大，因此手动实现
+%\def\revb#1{\textcolor{blue}{#1}}
+
+% 实现对修订与定稿的格式控制
+% 通过文件中的一个 REV 变量实现
+% 一般来讲以下两个语句是等价的
+%\ifx\REV\defined
+\ifdefined\REV
+	% 注释之删除
+	\def\udel#1{\CJKsout[format=\color{red}, thickness=0.25ex]{#1}}
+	% 注释之增加
+	\def\uadd#1{\textcolor{blue}{#1}}
+	% 同时定义一个跟随revb的空函数，方便查找替换
+	%\def\cmt#1{}
+\else
+	% 注释之删除
+	\def\udel#1{}
+	% 注释之增加
+	\def\uadd#1{#1}
+	% 同时定义一个跟随revb的空函数，方便查找替换
+	%\def\cmt#1{}
+\fi
+
+% 还要对历史修订进行格式控制，即不使用特殊格式
+% 注释之删除
+\def\udelhis#1{}
+% 注释之增加
+\def\uaddhis#1{#1}
+% 同时定义一个跟随revb的空函数，方便查找替换
+%\def\cmt#1{}
+
+
+% 注释的条件编译实现
+% 以\note{}包含的内容为注释，即加了\note{}这个自定义的注释命令
+% 通过在文件中以 \def\DRAFT{} 的方式定义标记定稿(不显示注释)的空宏实现隐藏注释
+\ifx\DRAFT\undefined
+	\def\note#1{}
+\else
+	\def\note#1{\textcolor{blue}{【}#1\textcolor{blue}{】}}
+\fi
+
+% 隐藏历史注释
+\def\notehis#1{}
+
+
+%支持中文的下划线
+\def\uline#1{\CJKunderline{#1}}
+\def\uuline#1{\CJKunderdblline{#1}}
+%\CJKunderline{修改内容}
+
+
+
+% change history
+% 220428 添加文字形波浪符支持
+% 220608 增加用于适配Excel2latex的表格设置
+% 220609 增加nns自定义命令
+% 220713 三线表与表格附注设置
+% 220826 超链接以及超链接换行支持，使用\url{#1}应用
+% 220830 修复误删除的修订颜色标记指令
+% 220830 自定义注释命令
+% 220830 在自定义注释命令的基础上实现了注释的条件编译(定稿隐藏注释)
+% 221117 增加subsubsection的配置；增加paragraph的配置
+% 221118 对section setting的针对申请与答复的条件调整
+% 221213 增加删除线
+% 230130 删除原有内容，修改成uadd与udel
+% 230419 隐藏历史注释，并增加了行号支持
+% 230505 角度符号支持
